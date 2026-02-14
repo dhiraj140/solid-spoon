@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>SARKARI RESULT · government jobs</title>
+    <!-- style.css will be embedded / linked – for single file demo we embed, but structure follows requirement -->
+    <style>
+        /* ========== style.css ========== */
+        /* mobile-first, flexbox, maroon/black theme, sarkariresult style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* header maroon */
+        .top-header {
+            background: #800000; /* maroon */
+            color: white;
+            padding: 1rem 1rem 0.6rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .top-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 0 #4d0000;
+        }
+        .top-header p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: #ffd9d9;
+            margin-top: 6px;
+            word-break: break-word;
+        }
+
+        /* black navigation bar */
+        .nav-bar {
+            background: #1e1e1e; /* near black */
+            padding: 0.75rem 0.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem 1rem;
+        }
+        .nav-container a {
+            color: #eee;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.3rem 0.4rem;
+            border-radius: 4px;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+        .nav-container a:hover {
+            background: #800000;
+            color: white;
+        }
+
+        /* main container */
+        .wrapper {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 0.75rem;
+            width: 100%;
+            flex: 1;
+        }
+
+        /* cards & sections */
+        .section-title {
+            background: #800000;
+            color: white;
+            padding: 0.7rem 1rem;
+            font-size: 1.35rem;
+            font-weight: 600;
+            border-radius: 8px 8px 0 0;
+            margin: 1.5rem 0 0.75rem 0;
+            letter-spacing: 0.5px;
+            border-left: 6px solid #ffb347;
+        }
+
+        .job-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* job card – mobile first, clickable */
+        .job-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.2rem 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: 0.2s;
+            border-left: 5px solid #800000;
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+        }
+        .job-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px -8px rgba(128,0,0,0.3);
+            border-color: #800000;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e1e1e;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .job-org {
+            font-size: 1rem;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: #f0e6e6;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+        }
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 1.5rem;
+            margin: 0.8rem 0;
+            font-size: 0.95rem;
+            background: #fafafa;
+            padding: 0.6rem 0.8rem;
+            border-radius: 12px;
+        }
+        .job-meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .badge-new {
+            background: #2e7d32;
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 10px;
+            letter-spacing: 0.4px;
+        }
+        .job-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            border-top: 1px dashed #ccc;
+            padding-top: 1rem;
+        }
+        .btn-link {
+            background: #800000;
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: 0.2s;
+            border: none;
+        }
+        .btn-link-outline {
+            background: transparent;
+            border: 1.5px solid #800000;
+            color: #800000;
+        }
+        .btn-link:hover {
+            background: #5c0000;
+            color: white;
+        }
+
+        /* result & admit list (simpler links) */
+        .list-links {
+            background: white;
+            border-radius: 20px;
+            padding: 0.5rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+        .list-item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0.8rem;
+            border-bottom: 1px solid #eee;
+            text-decoration: none;
+            color: #222;
+            transition: 0.1s;
+        }
+        .list-item:last-child { border-bottom: none; }
+        .list-item:hover { background: #fbf3f3; border-radius: 16px; }
+        .item-title { font-weight: 600; font-size: 1.05rem; }
+        .item-date { color: #800000; font-weight: 500; font-size: 0.9rem; background: #ffe6e6; padding: 0.2rem 0.8rem; border-radius: 30px; }
+
+        /* footer */
+        .footer {
+            text-align: center;
+            background: #1e1e1e;
+            color: #aaa;
+            padding: 1.5rem;
+            margin-top: 2.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* tablet / desktop adjustments */
+        @media (min-width: 640px) {
+            .job-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.2rem;
+            }
+            .nav-container { justify-content: flex-start; }
+        }
+        @media (min-width: 1024px) {
+            .job-grid { grid-template-columns: repeat(3, 1fr); }
+            .wrapper { padding: 0 1rem; }
+        }
+
+        /* extra: highlight new */
+        .highlight-new {
+            border-left: 6px solid #2e7d32;
+            background: #f9fff9;
+        }
+    </style>
+    <!-- ========== END style.css ========== -->
+</head>
+<body>
+    <!-- MAROON HEADER -->
+    <header class="top-header">
+        <h1>SARKARI RESULT</h1>
+        <p>www.sarkariresult.com</p>
+    </header>
+
+    <!-- BLACK NAVIGATION -->
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="#">Home</a>
+            <a href="#latest-jobs">Latest Jobs</a>
+            <a href="#results">Results</a>
+            <a href="#admit-card">Admit Card</a>
+            <a href="#">Answer Key</a>
+            <a href="#">Syllabus</a>
+            <a href="#">Admission</a>
+            <a href="#">Important</a>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT (dynamic sections) -->
+    <main class="wrapper" id="main-content">
+        <!-- Latest Jobs section -->
+        <section id="latest-jobs">
+            <div class="section-title">📋 लेटेस्ट जॉब्स (Latest Jobs)</div>
+            <div class="job-grid" id="job-list-container">
+                <!-- injected by javascript -->
+            </div>
+        </section>
+
+        <!-- Results section -->
+        <section id="results" style="margin-top: 2rem;">
+            <div class="section-title">📂 रिजल्ट्स (Results)</div>
+            <div class="list-links" id="results-container"></div>
+        </section>
+
+        <!-- Admit Card section -->
+        <section id="admit-card" style="margin-top: 2rem;">
+            <div class="section-title">🎫 एडमिट कार्ड (Admit Card)</div>
+            <div class="list-links" id="admit-container"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        © Sarkari Result 2025 · official govt job portal (static demo)
+    </footer>
+
+    <!-- ========== data.js ========== (admin updates only this part) -->
+    <script>
+        // ---------- data.js (ADMIN PANEL) ----------
+        // Admin simply edits objects below – no backend, no build.
+        // All jobs, results, admit cards are stored here.
+        // After editing and pushing to GitHub, site auto-updates.
+
+        const jobsData = [
+            {
+                id: 1,
+                title: "SSC CHSL 2025 Online Form",
+                organization: "Staff Selection Commission",
+                postDate: "2025-02-10",
+                lastDate: "2025-03-15",
+                qualification: "Bachelor’s degree in any discipline",
+                ageLimit: "18-27 years",
+                applicationFee: "₹100 (Gen) / ₹0 (SC/ST)",
+                applyLink: "https://ssc.nic.in",
+                pdfLink: "#",
+                isNew: true,
+                category: "jobs"
+            },
+            {
+                id: 2,
+                title: "UP Police Constable Recruitment",
+                organization: "Uttar Pradesh Police",
+                postDate: "2025-02-01",
+                lastDate: "2025-03-20",
+                qualification: "12th pass",
+                ageLimit: "18-22 years",
+                applicationFee: "₹400 (Gen) / ₹200 (SC/ST)",
+                applyLink: "#",
+                pdfLink: "#",
+                isNew: false,
+                category: "jobs"
+            },
+            {
+                id: 3,
+                title: "IBPS Clerk 2025",
+                organization: "IBPS",
+                postDate: "2025-02-14",
+                lastDate: "2025-03-05",
+                qualification: "Graduate",
+                ageLimit: "20-28 years",
+                applicationFee: "₹850 (Gen) / ₹175 (SC/ST)",
+                applyLink: "#",
+                pdfLink: "#",
+                isNew: true,
+                category: "jobs"
+            },
+            {
+                id: 4,
+                title: "RRB NTPC Graduate Level",
+                organization: "Railway Recruitment Board",
+                postDate: "2025-02-09",
+                lastDate: "2025-03-25",
+                qualification: "Bachelor’s degree",
+                ageLimit: "18-30 years",
+                applicationFee: "₹500 (Gen) / ₹250 (SC/ST)",
+                applyLink: "#",
+                pdfLink: "#",
+                isNew: false,
+                category: "jobs"
+            }
+        ];
+
+        // Results data (simple)
+        const resultsData = [
+            { title: "SSC CGL 2024 Result", releaseDate: "15 Feb 2025", link: "#" },
+            { title: "UP Board 10th Result 2025", releaseDate: "10 Feb 2025", link: "#" },
+            { title: "IBPS PO Pre Result", releaseDate: "05 Feb 2025", link: "#" },
+            { title: "CTET Dec 2024 Result", releaseDate: "28 Jan 2025", link: "#" }
+        ];
+
+        // Admit card data
+        const admitCardData = [
+            { title: "SSC GD Constable Admit Card", examDate: "25 Feb 2025", link: "#" },
+            { title: "NEET UG 2025 Admit Card", examDate: "05 March 2025", link: "#" },
+            { title: "UPTET 2025 Exam City", examDate: "15 March 2025", link: "#" }
+        ];
+
+        // ========== end of data.js ==========
+    </script>
+
+    <!-- ========== script.js ========== (rendering logic) -->
+    <script>
+        // ---------- script.js ----------
+        // Renders data from data.js into the DOM.
+        // Pure vanilla JS, mobile-first cards.
+
+        (function() {
+            // helper: format date to relative (just show post date nicely)
+            function formatDate(dateStr) {
+                const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return dateStr; // fallback
+                return d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            }
+
+            // ---------- render job cards (latest jobs) ----------
+            const jobContainer = document.getElementById('job-list-container');
+            if (jobContainer) {
+                // sort by postDate descending (latest first)
+                const sortedJobs = [...jobsData].sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
+
+                jobContainer.innerHTML = sortedJobs.map(job => {
+                    const newBadge = job.isNew ? '<span class="badge-new">New</span>' : '';
+                    const postDateFormatted = formatDate(job.postDate);
+                    const lastDateFormatted = formatDate(job.lastDate);
+
+                    return `
+                        <a href="${job.applyLink || '#'}" class="job-card ${job.isNew ? 'highlight-new' : ''}" target="_blank" rel="noopener">
+                            <div class="job-title">${job.title} ${newBadge}</div>
+                            <div class="job-org">${job.organization}</div>
+                            <div class="job-meta">
+                                <span>📅 Post: ${postDateFormatted}</span>
+                                <span>⌛ Last: ${lastDateFormatted}</span>
+                                <span>🎓 ${job.qualification}</span>
+                                <span>💰 Fee: ${job.applicationFee}</span>
+                            </div>
+                            <div class="job-footer">
+                                <span class="btn-link">📝 Apply Online</span>
+                                <span class="btn-link btn-link-outline">📄 Notification</span>
+                            </div>
+                            <small style="color:#777; display:block; margin-top:6px;">Age: ${job.ageLimit}</small>
+                        </a>
+                    `;
+                }).join('');
+            }
+
+            // ---------- render results (simple list) ----------
+            const resultsEl = document.getElementById('results-container');
+            if (resultsEl) {
+                resultsEl.innerHTML = resultsData.map(res => `
+                    <a href="${res.link}" class="list-item" target="_blank" rel="noopener">
+                        <span class="item-title">📌 ${res.title}</span>
+                        <span class="item-date">${res.releaseDate}</span>
+                    </a>
+                `).join('');
+            }
+
+            // ---------- render admit card list ----------
+            const admitEl = document.getElementById('admit-container');
+            if (admitEl) {
+                admitEl.innerHTML = admitCardData.map(ad => `
+                    <a href="${ad.link}" class="list-item" target="_blank" rel="noopener">
+                        <span class="item-title">🎫 ${ad.title}</span>
+                        <span class="item-date">Exam: ${ad.examDate}</span>
+                    </a>
+                `).join('');
+            }
+
+            // optional: add smooth scroll behavior for nav links (internal anchors)
+            document.querySelectorAll('.nav-container a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const hash = this.getAttribute('href');
+                    if (hash === "#") return;
+                    const target = document.querySelector(hash);
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+        })();
+    </script>
+
+    <!-- all sections are fully dynamic based on data.js. Admin updates above. -->
+    <!-- Project structure:
+        /index.html (contains embedded style, data, script – but for deployment separate files)
+        /css/style.css (move style block)
+        /js/data.js (move jobsData, resultsData, admitCardData)
+        /js/script.js (move rendering IIFE)
+
+        For production: uncomment external links and move blocks accordingly.
+    -->
+</body>
+</html>
