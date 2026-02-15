@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Panel</h1>
+    </header>
+
+    <div class="admin-container">
+        <!-- Add Job Form -->
+        <section>
+            <h2>Add New Job / Admit Card</h2>
+            <form id="jobForm">
+                <input type="text" id="jobTitle" placeholder="Title" required>
+                <input type="date" id="jobLastDate" required>
+                <input type="url" id="jobLink" placeholder="Link" required>
+                <select id="jobCategory" required>
+                    <option value="job">Job</option>
+                    <option value="admitcard">Admit Card</option>
+                </select>
+                <button type="submit">Add Job</button>
+            </form>
+            <div id="jobMessage"></div>
+        </section>
+
+        <!-- Add Notice Form -->
+        <section>
+            <h2>Add Notice</h2>
+            <form id="noticeForm">
+                <input type="text" id="noticeText" placeholder="Notice text" required>
+                <input type="url" id="noticeLink" placeholder="Link" required>
+                <input type="number" id="noticePriority" placeholder="Priority (higher = first)" value="1" required>
+                <button type="submit">Add Notice</button>
+            </form>
+            <div id="noticeMessage"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p><a href="index.html">← Back to Home</a></p>
+    </footer>
+
+    <script>
+        // Simple admin panel JavaScript
+        document.getElementById('jobForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                title: document.getElementById('jobTitle').value,
+                last_date: document.getElementById('jobLastDate').value,
+                link: document.getElementById('jobLink').value,
+                category: document.getElementById('jobCategory').value
+            };
+            try {
+                const res = await fetch('/api/jobs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await res.json();
+                document.getElementById('jobMessage').innerText = data.message || 'Added successfully!';
+                document.getElementById('jobForm').reset();
+            } catch (err) {
+                document.getElementById('jobMessage').innerText = 'Error adding job.';
+            }
+        });
+
+        document.getElementById('noticeForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = {
+                text: document.getElementById('noticeText').value,
+                link: document.getElementById('noticeLink').value,
+                priority: parseInt(document.getElementById('noticePriority').value)
+            };
+            try {
+                const res = await fetch('/api/notices', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                const data = await res.json();
+                document.getElementById('noticeMessage').innerText = data.message || 'Added successfully!';
+                document.getElementById('noticeForm').reset();
+            } catch (err) {
+                document.getElementById('noticeMessage').innerText = 'Error adding notice.';
+            }
+        });
+    </script>
+</body>
+</html>
