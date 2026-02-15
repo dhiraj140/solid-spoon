@@ -2,495 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>SARKARI RESULT · complete admin data</title>
-    <style>
-        /*========== style.css ==========*/
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-        }
-        body {
-            background: #f0f2f5;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .top-header {
-            background: #800000;
-            color: white;
-            padding: 1rem 1rem 0.6rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .top-header h1 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 0 #4d0000;
-        }
-        .top-header p {
-            font-size: 1rem;
-            color: #ffd9d9;
-            margin-top: 6px;
-        }
-        .nav-bar {
-            background: #1e1e1e;
-            padding: 0.75rem 0.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-        .nav-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.5rem 1rem;
-        }
-        .nav-container a {
-            color: #eee;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.3rem 0.4rem;
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-        .nav-container a:hover {
-            background: #800000;
-            color: white;
-        }
-        .wrapper {
-            max-width: 1200px;
-            margin: 1.5rem auto;
-            padding: 0 0.75rem;
-            width: 100%;
-            flex: 1;
-        }
-        .section-title {
-            background: #800000;
-            color: white;
-            padding: 0.7rem 1rem;
-            font-size: 1.35rem;
-            font-weight: 600;
-            border-radius: 8px 8px 0 0;
-            margin: 1.5rem 0 0.75rem;
-            border-left: 6px solid #ffb347;
-        }
-        .job-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        .job-card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.2rem 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-left: 5px solid #800000;
-            display: block;
-            text-decoration: none;
-            color: inherit;
-            border: 1px solid #e0e0e0;
-            transition: 0.2s;
-        }
-        .job-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px -8px rgba(128,0,0,0.3);
-            border-color: #800000;
-        }
-        .job-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1e1e1e;
-            margin-bottom: 6px;
-        }
-        .job-org {
-            font-size: 1rem;
-            color: #555;
-            font-weight: 500;
-            margin-bottom: 10px;
-            display: inline-block;
-            background: #f0e6e6;
-            padding: 0.2rem 0.8rem;
-            border-radius: 30px;
-        }
-        .job-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem 1.5rem;
-            margin: 0.8rem 0;
-            font-size: 0.95rem;
-            background: #fafafa;
-            padding: 0.6rem 0.8rem;
-            border-radius: 12px;
-        }
-        .job-meta span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .badge-new {
-            background: #2e7d32;
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        .badge-private {
-            background: #0277bd;
-            color: white;
-            padding: 0.2rem 0.7rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 10px;
-        }
-        .job-footer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
-            border-top: 1px dashed #ccc;
-            padding-top: 1rem;
-        }
-        .btn-link {
-            background: #800000;
-            color: white;
-            padding: 0.5rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-        }
-        .btn-link-outline {
-            background: transparent;
-            border: 1.5px solid #800000;
-            color: #800000;
-        }
-        .list-links {
-            background: white;
-            border-radius: 20px;
-            padding: 0.5rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-        }
-        .list-item {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0.8rem;
-            border-bottom: 1px solid #eee;
-            text-decoration: none;
-            color: #222;
-        }
-        .list-item:last-child { border-bottom: none; }
-        .list-item:hover { background: #fbf3f3; border-radius: 16px; }
-        .item-title { font-weight: 600; }
-        .item-date { color: #800000; background: #ffe6e6; padding: 0.2rem 0.8rem; border-radius: 30px; }
-        .footer {
-            text-align: center;
-            background: #1e1e1e;
-            color: #aaa;
-            padding: 1.5rem;
-            margin-top: 2.5rem;
-        }
-        @media (min-width: 640px) {
-            .job-grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .job-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        .highlight-new { border-left: 6px solid #2e7d32; background: #f9fff9; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARKARI RESULT</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header class="top-header">
+    <!-- Header -->
+    <header>
         <h1>SARKARI RESULT</h1>
         <p>www.sarkariresult.com</p>
     </header>
 
-    <nav class="nav-bar">
-        <div class="nav-container">
-            <a href="#">Home</a>
-            <a href="#latest-jobs">Latest Jobs</a>
-            <a href="#private-jobs">Private Jobs</a>
-            <a href="#results">Results</a>
-            <a href="#admit-card">Admit Card</a>
-            <a href="#">Answer Key</a>
-            <a href="#">Syllabus</a>
-            <a href="#">Admission</a>
-            <a href="#">Important</a>
-        </div>
+    <!-- Scrolling Notice Bar -->
+    <div class="notice-bar">
+        <marquee behavior="scroll" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+            <span id="notice-container"></span>
+        </marquee>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Latest Jobs</a></li>
+            <li><a href="#">Results</a></li>
+            <li><a href="#">Admit Card</a></li>
+            <li><a href="#">Answer Key</a></li>
+            <li><a href="#">Syllabus</a></li>
+            <li><a href="#">Admission</a></li>
+            <li><a href="#">Important</a></li>
+        </ul>
     </nav>
 
-    <main class="wrapper">
-        <!-- govt jobs -->
+    <!-- Colorful Boxes -->
+    <div class="boxes">
+        <div class="box" style="background: linear-gradient(135deg, #ff4e50, #f9d423);">Latest Jobs</div>
+        <div class="box" style="background: linear-gradient(135deg, #1cd8d2, #93edc7);">Results</div>
+        <div class="box" style="background: linear-gradient(135deg, #f857a6, #ff5858);">Admit Card</div>
+        <div class="box" style="background: linear-gradient(135deg, #ffb347, #ffcc33);">Apply Online</div>
+    </div>
+
+    <!-- Dynamic Sections -->
+    <div class="sections">
+        <!-- Latest Jobs -->
         <section id="latest-jobs">
-            <div class="section-title">📋 सरकारी नौकरी (Latest Govt Jobs)</div>
-            <div class="job-grid" id="job-list-container"></div>
+            <h2>Latest Jobs</h2>
+            <ul id="jobs-list"></ul>
         </section>
 
-        <!-- private jobs -->
-        <section id="private-jobs" style="margin-top: 2rem;">
-            <div class="section-title">🏢 प्राइवेट जॉब्स (Private Sector)</div>
-            <div class="job-grid" id="private-job-container"></div>
-        </section>
-
-        <!-- results -->
+        <!-- Results -->
         <section id="results">
-            <div class="section-title">📂 रिजल्ट्स (Results)</div>
-            <div class="list-links" id="results-container"></div>
+            <h2>Results</h2>
+            <ul id="results-list"></ul>
         </section>
 
-        <!-- admit card -->
+        <!-- Admit Card -->
         <section id="admit-card">
-            <div class="section-title">🎫 एडमिट कार्ड (Admit Card)</div>
-            <div class="list-links" id="admit-container"></div>
+            <h2>Admit Card</h2>
+            <ul id="admit-list"></ul>
         </section>
-    </main>
+    </div>
 
-    <footer class="footer">© Sarkari Result 2025 · single array admin</footer>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Sarkari Result. All rights reserved. Disclaimer: This is a demo website.</p>
+    </footer>
 
-    <!-- ========== ADMIN DATA SECTION – EDIT ONLY THIS ========== -->
-    <script>
-        // ---------- 🛑 ADMIN: ALL SITE DATA IN ONE ARRAY ----------
-        // Each job object can be govt or private. Add/remove/modify as needed.
-        // No backend, no external files – just edit below and push to GitHub.
-        
-        const allJobsData = [
-            // Govt jobs (category: "govt")
-            {
-                id: 1,
-                title: "SSC CHSL 2025 Online Form",
-                organization: "Staff Selection Commission",
-                postDate: "2025-02-10",
-                lastDate: "2025-03-15",
-                qualification: "Bachelor’s degree",
-                ageLimit: "18-27 years",
-                applicationFee: "₹100 (Gen) / ₹0 (SC/ST)",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: true,
-                category: "govt"
-            },
-            {
-                id: 2,
-                title: "UP Police Constable Recruitment",
-                organization: "Uttar Pradesh Police",
-                postDate: "2025-02-01",
-                lastDate: "2025-03-20",
-                qualification: "12th pass",
-                ageLimit: "18-22 years",
-                applicationFee: "₹400 (Gen) / ₹200 (SC/ST)",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: false,
-                category: "govt"
-            },
-            {
-                id: 3,
-                title: "IBPS Clerk 2025",
-                organization: "IBPS",
-                postDate: "2025-02-14",
-                lastDate: "2025-03-05",
-                qualification: "Graduate",
-                ageLimit: "20-28 years",
-                applicationFee: "₹850 (Gen) / ₹175 (SC/ST)",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: true,
-                category: "govt"
-            },
-            // Private jobs (category: "private")
-            {
-                id: 101,
-                title: "TCS Digital Hiring 2025",
-                organization: "Tata Consultancy Services",
-                postDate: "2025-02-12",
-                lastDate: "2025-03-01",
-                qualification: "B.E./B.Tech/MCA",
-                ageLimit: "2024/2025 batch",
-                applicationFee: "₹0 (Free)",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: true,
-                category: "private"
-            },
-            {
-                id: 102,
-                title: "Amazon Operations Associate",
-                organization: "Amazon India",
-                postDate: "2025-02-09",
-                lastDate: "2025-02-28",
-                qualification: "Any Graduate",
-                ageLimit: "18-30 years",
-                applicationFee: "No fee",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: true,
-                category: "private"
-            },
-            {
-                id: 103,
-                title: "Wipro Walk-in Drive",
-                organization: "Wipro Ltd",
-                postDate: "2025-02-05",
-                lastDate: "2025-02-25",
-                qualification: "Diploma / Graduate",
-                ageLimit: "18-28 years",
-                applicationFee: "None",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: false,
-                category: "private"
-            },
-            {
-                id: 104,
-                title: "Infosys BPM Recruitment",
-                organization: "Infosys",
-                postDate: "2025-02-13",
-                lastDate: "2025-03-10",
-                qualification: "PUC / Graduate",
-                ageLimit: "18-26 years",
-                applicationFee: "No fee",
-                applyLink: "#",
-                pdfLink: "#",
-                isNew: true,
-                category: "private"
-            }
-        ];
-
-        // Separate arrays for results & admit cards (also fully editable)
-        const resultsData = [
-            { title: "SSC CGL 2024 Result", releaseDate: "15 Feb 2025", link: "#" },
-            { title: "UP Board 10th Result 2025", releaseDate: "10 Feb 2025", link: "#" },
-            { title: "IBPS PO Pre Result", releaseDate: "05 Feb 2025", link: "#" }
-        ];
-
-        const admitCardData = [
-            { title: "SSC GD Constable Admit Card", examDate: "25 Feb 2025", link: "#" },
-            { title: "NEET UG 2025 Admit Card", examDate: "05 March 2025", link: "#" }
-        ];
-
-        // ---------- END OF ADMIN DATA SECTION ----------
-    </script>
-
-    <!-- ========== RENDERING SCRIPT (do not edit unless changing layout) ========== -->
-    <script>
-        (function() {
-            // helper
-            function formatDate(dateStr) {
-                const d = new Date(dateStr);
-                if (isNaN(d.getTime())) return dateStr;
-                return d.toLocaleDateString('en-IN', { day:'2-digit', month:'short', year:'numeric' });
-            }
-
-            // 1. Render govt jobs (category = govt)
-            const govtContainer = document.getElementById('job-list-container');
-            if (govtContainer) {
-                const govtJobs = allJobsData
-                    .filter(job => job.category === 'govt')
-                    .sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
-                
-                govtContainer.innerHTML = govtJobs.map(job => {
-                    const newBadge = job.isNew ? '<span class="badge-new">New</span>' : '';
-                    return `
-                        <a href="${job.applyLink}" class="job-card ${job.isNew ? 'highlight-new' : ''}" target="_blank">
-                            <div class="job-title">${job.title} ${newBadge}</div>
-                            <div class="job-org">${job.organization}</div>
-                            <div class="job-meta">
-                                <span>📅 Post: ${formatDate(job.postDate)}</span>
-                                <span>⌛ Last: ${formatDate(job.lastDate)}</span>
-                                <span>🎓 ${job.qualification}</span>
-                                <span>💰 Fee: ${job.applicationFee}</span>
-                            </div>
-                            <div class="job-footer">
-                                <span class="btn-link">📝 Apply</span>
-                                <span class="btn-link btn-link-outline">📄 Notif</span>
-                            </div>
-                            <small style="color:#777;">Age: ${job.ageLimit}</small>
-                        </a>
-                    `;
-                }).join('');
-            }
-
-            // 2. Render private jobs (category = private)
-            const privateContainer = document.getElementById('private-job-container');
-            if (privateContainer) {
-                const privateJobs = allJobsData
-                    .filter(job => job.category === 'private')
-                    .sort((a, b) => new Date(b.postDate) - new Date(a.postDate));
-                
-                privateContainer.innerHTML = privateJobs.map(job => {
-                    const newBadge = job.isNew ? '<span class="badge-new">New</span>' : '';
-                    const privateTag = '<span class="badge-private">Private</span>';
-                    return `
-                        <a href="${job.applyLink}" class="job-card ${job.isNew ? 'highlight-new' : ''}" target="_blank">
-                            <div class="job-title">${job.title} ${newBadge} ${privateTag}</div>
-                            <div class="job-org">${job.organization}</div>
-                            <div class="job-meta">
-                                <span>📅 Post: ${formatDate(job.postDate)}</span>
-                                <span>⌛ Last: ${formatDate(job.lastDate)}</span>
-                                <span>🎓 ${job.qualification}</span>
-                                <span>💰 Fee: ${job.applicationFee}</span>
-                            </div>
-                            <div class="job-footer">
-                                <span class="btn-link">📝 Apply</span>
-                                <span class="btn-link btn-link-outline">📄 Details</span>
-                            </div>
-                            <small style="color:#777;">Eligibility: ${job.ageLimit}</small>
-                        </a>
-                    `;
-                }).join('');
-            }
-
-            // 3. Render results
-            const resultsEl = document.getElementById('results-container');
-            if (resultsEl) {
-                resultsEl.innerHTML = resultsData.map(res => `
-                    <a href="${res.link}" class="list-item" target="_blank">
-                        <span class="item-title">📌 ${res.title}</span>
-                        <span class="item-date">${res.releaseDate}</span>
-                    </a>
-                `).join('');
-            }
-
-            // 4. Render admit cards
-            const admitEl = document.getElementById('admit-container');
-            if (admitEl) {
-                admitEl.innerHTML = admitCardData.map(ad => `
-                    <a href="${ad.link}" class="list-item" target="_blank">
-                        <span class="item-title">🎫 ${ad.title}</span>
-                        <span class="item-date">Exam: ${ad.examDate}</span>
-                    </a>
-                `).join('');
-            }
-
-            // smooth scroll for anchor nav
-            document.querySelectorAll('.nav-container a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    const hash = this.getAttribute('href');
-                    if (hash === "#") return;
-                    const target = document.querySelector(hash);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-        })();
-    </script>
-    <!-- 
-        FOLDER STRUCTURE (single file for GitHub Pages):
-        index.html  (contains style, admin data, render logic)
-        No external files needed – everything in one HTML.
-    -->
+    <script src="js/script.js"></script>
 </body>
 </html>
