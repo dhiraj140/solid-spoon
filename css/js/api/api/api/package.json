@@ -1,0 +1,10 @@
+{
+  "name": "sarkari-result-clone",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {
+    "@vercel/postgres": "^0.5.0"
+  }
+}
